@@ -2,6 +2,7 @@
   "name": "nervox.app",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -19,5 +20,8 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
   }
 }
