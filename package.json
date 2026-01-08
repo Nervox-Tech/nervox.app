@@ -2,6 +2,7 @@
   "name": "nervox.app",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -9,6 +10,9 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.0",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "turbo": "^2.7.2",
     "typescript": "5.9.2"
@@ -16,5 +20,8 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
   }
 }
