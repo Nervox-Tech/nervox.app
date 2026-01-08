@@ -1,9 +1,17 @@
+import { Suspense } from "react"
+import { Layout } from "./shared/layout/Layout"
+import {BrowserRouter } from 'react-router-dom';
+
 function App() {
 
   return (
-    <div>
-      <h1 className="text-3xl"> Hello this is the client </h1>
-    </div>
+   <Suspense fallback={<div>Loading...</div>}>
+    <Layout>
+      <BrowserRouter>
+        {/* Your routes and components go here */}
+      </BrowserRouter>
+    </Layout>
+   </Suspense>
   )
 }
 
