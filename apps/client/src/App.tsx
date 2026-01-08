@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { Layout } from "./shared/layout/Layout"
 import {BrowserRouter } from 'react-router-dom';
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
    <Suspense fallback={<div>Loading...</div>}>
     <Layout>
       <BrowserRouter>
-        {/* Your routes and components go here */}
+        <AppRoutes />
       </BrowserRouter>
     </Layout>
    </Suspense>
