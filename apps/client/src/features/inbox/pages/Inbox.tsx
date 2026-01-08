@@ -257,7 +257,7 @@ function WhatsAppSetup({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-function InboxView() {
+function Inbox() {
   const [activeThreadId, setActiveThreadId] = useState<string>('1');
   const [isEditingDraft, setIsEditingDraft] = useState(false);
   const [draftContent, setDraftContent] = useState('');
@@ -538,5 +538,4 @@ function InboxView() {
 }
 
 
-export default InboxView;
-export { InboxView as Inbox };
+export default Inbox;
