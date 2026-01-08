@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { Sidebar } from './Sidebar';
+import Sidebar  from './Sidebar';
 import { MobileNav } from './mobile-view/MobileNav';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
 import { cn } from '@/lib/utils';

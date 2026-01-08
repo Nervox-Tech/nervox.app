@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shared/components/ui/sheet";
-import { SidebarContent } from "../Sidebar";
+import Sidebar from "../Sidebar";
 
 export function MobileSidebar() {
     return (
@@ -13,7 +13,7 @@ export function MobileSidebar() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72 border-r border-sidebar-border bg-sidebar">
-                <SidebarContent />
+                <Sidebar />
             </SheetContent>
         </Sheet>
     );
