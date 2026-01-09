@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { MobileSidebar } from './mobile-view/MobileSidebar';
 
 interface TopBarProps {
-  title: string;
+  title?: string;
   subtitle?: string;
 }
 

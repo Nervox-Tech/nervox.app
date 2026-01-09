@@ -287,7 +287,6 @@ function Inbox() {
 
   return (
     <div className="h-screen flex flex-col bg-background overflow-hidden">
-      <TopBar title="Inbox" />
       <div className="flex-1 flex overflow-hidden">
 
         {/* LEFT SIDEBAR - Thread List */}

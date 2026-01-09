@@ -9,15 +9,17 @@ import {
 import { useAppStore } from '@/shared/stores/appStore';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
 import { SidebarNavItem } from '../components/Layout/SidebarNavItem';
+import ROUTE_PATH from '../constant/route';
 
 const navItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: Grid },
-  { id: 'inbox', label: 'Inbox', icon: Inbox, badge: 2 },
-  { id: 'tasks', label: 'Tasks', icon: CheckSquare },
-  { id: 'projects', label: 'Projects', icon: FolderKanban },
-  { id: 'documents', label: 'Documents', icon: FileText },
-  { id: 'profile', label: 'Settings', icon: Settings },
+  { id: 'dashboard', label: 'Dashboard', icon: Grid, href: ROUTE_PATH.DASHBOARD },
+  { id: 'inbox', label: 'Inbox', icon: Inbox, badge: 2, href: ROUTE_PATH.INBOX.INDEX },
+  { id: 'tasks', label: 'Tasks', icon: CheckSquare, href: ROUTE_PATH.TASKS },
+  { id: 'projects', label: 'Projects', icon: FolderKanban, href: ROUTE_PATH.PROJECTS },
+  { id: 'documents', label: 'Documents', icon: FileText, href: ROUTE_PATH.DOCUMENTS },
+  { id: 'profile', label: 'Settings', icon: Settings, href: ROUTE_PATH.SETTINGS },
 ];
+
 
 
 export default function Sidebar() {

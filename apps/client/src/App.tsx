@@ -7,11 +7,11 @@ function App() {
 
   return (
    <Suspense fallback={<div>Loading...</div>}>
-    <Layout>
       <BrowserRouter>
+    <Layout>
         <AppRoutes />
-      </BrowserRouter>
     </Layout>
+      </BrowserRouter>
    </Suspense>
   )
 }

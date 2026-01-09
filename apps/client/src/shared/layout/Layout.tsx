@@ -3,6 +3,7 @@ import Sidebar  from './Sidebar';
 import { MobileNav } from './mobile-view/MobileNav';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
 import { cn } from '@/lib/utils';
+import { TopBar } from './NavBar';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ export function Layout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       
+      <TopBar />
       {/* Desktop/Tablet Sidebar */}
       {!isMobile && <Sidebar />}
       
