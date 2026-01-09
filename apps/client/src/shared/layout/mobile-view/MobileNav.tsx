@@ -43,7 +43,7 @@ export function MobileNav() {
             {/* Mobile Menu Button - Fixed at bottom */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+                className="fixed bottom-6 right-6 z-60 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -58,7 +58,7 @@ export function MobileNav() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[55]"
+                            className="fixed inset-0 bg-background/80 backdrop-blur-xs z-55"
                         />
 
                         {/* Navigation Panel */}
@@ -67,7 +67,7 @@ export function MobileNav() {
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: '100%', opacity: 0 }}
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            className="fixed bottom-0 left-0 right-0 z-[56] bg-card border-t border-border rounded-t-3xl p-6 pb-24 max-h-[80vh] overflow-y-auto"
+                            className="fixed bottom-0 left-0 right-0 z-56 bg-card border-t border-border rounded-t-3xl p-6 pb-24 max-h-[80vh] overflow-y-auto"
                         >
                             <div className="w-12 h-1 bg-border rounded-full mx-auto mb-6" />
 
