@@ -1,7 +1,6 @@
-import React from 'react';
 import { cn } from '@/lib/utils';
-import { LucideIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import type { LucideIcon } from 'lucide-react';
+import { Button } from '@/shared/components/ui/button';
 
 interface EmptyStateProps {
     icon: LucideIcon;
@@ -10,7 +9,7 @@ interface EmptyStateProps {
     action?: {
         label: string;
         onClick: () => void;
-        variant?: "default" | "destructive" | "outline-solid" | "secondary" | "ghost" | "link";
+        variant?: "default" | "destructive" | "secondary" | "ghost" | "link" | "outline" | null | undefined
     };
     className?: string;
     iconClassName?: string;

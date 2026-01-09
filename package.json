@@ -1,6 +1,7 @@
 {
   "name": "nervox.app",
   "private": true,
+  "type": "module",
   "scripts": {
     "prepare": "husky",
     "build": "turbo run build",
