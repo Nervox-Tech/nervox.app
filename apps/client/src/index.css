@@ -1,6 +1,326 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility card-interactive {
+  /* Card variants */
+  /* Card variants */
+  @apply bg-card border border-border shadow-xs rounded-lg transition-all duration-200;
+  @apply hover:border-primary/50 hover:shadow-md;
+}
+
+@utility card-ai {
+  @apply bg-card/40 backdrop-blur-md border border-primary/20 rounded-xl;
+  @apply shadow-xl shadow-primary/5 relative overflow-hidden;
+}
+
+@utility glass {
+  @apply bg-background/40 backdrop-blur-xl border border-white/10 shadow-lg;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
+}
+
+@utility badge-success {
+  /* Status badges */
+  @apply bg-[hsl(var(--status-success)/0.15)] text-[hsl(var(--status-success))] border-[hsl(var(--status-success)/0.3)];
+}
+
+@utility badge-warning {
+  @apply bg-[hsl(var(--status-warning)/0.15)] text-[hsl(var(--status-warning))] border-[hsl(var(--status-warning)/0.3)];
+}
+
+@utility badge-error {
+  @apply bg-[hsl(var(--status-error)/0.15)] text-[hsl(var(--status-error))] border-[hsl(var(--status-error)/0.3)];
+}
+
+@utility badge-info {
+  @apply bg-[hsl(var(--status-info)/0.15)] text-[hsl(var(--status-info))] border-[hsl(var(--status-info)/0.3)];
+}
+
+@utility badge-email {
+  /* Platform badges */
+  @apply bg-[hsl(var(--platform-email)/0.15)] text-[hsl(var(--platform-email))];
+}
+
+@utility badge-whatsapp {
+  @apply bg-[hsl(var(--platform-whatsapp)/0.15)] text-[hsl(var(--platform-whatsapp))];
+}
+
+@utility priority-high {
+  /* Priority indicators */
+  @apply text-[hsl(var(--priority-high))];
+}
+
+@utility priority-medium {
+  @apply text-[hsl(var(--priority-medium))];
+}
+
+@utility priority-low {
+  @apply text-[hsl(var(--priority-low))];
+}
+
+@utility ai-glow {
+  /* AI glow effect */
+  @apply relative;
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg opacity-20;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--ai-glow)) 0%,
+      transparent 50%
+    );
+    filter: blur(20px);
+    z-index: -1;
+  }
+}
+
+@utility kanban-column {
+  /* Kanban column */
+  @apply bg-secondary/40 border border-border/40 rounded-lg p-2 min-h-[200px] max-h-[calc(100vh-280px)] overflow-y-auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-border/50 rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@utility custom-scrollbar {
+  /* Scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@utility transition-smooth {
+  /* Smooth transitions */
+  @apply transition-all duration-200 ease-out;
+}
+
+@utility text-gradient {
+  /* Text gradient */
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(262 83% 70%) 100%
+  );
+}
+
+@utility hover-lift {
+  /* Subtle hover lift */
+  @apply transition-transform duration-200;
+
+  &:hover {
+    @apply -translate-y-0.5;
+  }
+}
+
+@utility text-responsive-xs {
+  /* Responsive typography utilities */
+  @apply text-xs sm:text-sm;
+}
+
+@utility text-responsive-sm {
+  @apply text-sm sm:text-base;
+}
+
+@utility text-responsive-base {
+  @apply text-base sm:text-lg;
+}
+
+@utility text-responsive-lg {
+  @apply text-lg sm:text-xl;
+}
+
+@utility text-responsive-xl {
+  @apply text-xl sm:text-2xl;
+}
+
+@utility text-responsive-2xl {
+  @apply text-2xl sm:text-3xl;
+}
+
+@utility text-responsive-3xl {
+  @apply text-3xl sm:text-4xl;
+}
+
+@utility p-responsive-xs {
+  /* Responsive spacing utilities */
+  @apply p-2 sm:p-3 md:p-4;
+}
+
+@utility p-responsive-sm {
+  @apply p-3 sm:p-4 md:p-6;
+}
+
+@utility p-responsive-md {
+  @apply p-4 sm:p-6 md:p-8;
+}
+
+@utility p-responsive-lg {
+  @apply p-6 sm:p-8 md:p-10;
+}
+
+@utility m-responsive-xs {
+  @apply m-2 sm:m-3 md:m-4;
+}
+
+@utility m-responsive-sm {
+  @apply m-3 sm:m-4 md:m-6;
+}
+
+@utility m-responsive-md {
+  @apply m-4 sm:m-6 md:m-8;
+}
+
+@utility m-responsive-lg {
+  @apply m-6 sm:m-8 md:m-10;
+}
+
+@utility touch-target {
+  /* Touch-friendly utilities */
+  @apply min-h-[44px] min-w-[44px] touch-manipulation;
+}
+
+@utility touch-input {
+  @apply min-h-[44px] touch-manipulation;
+}
+
+@utility touch-button {
+  @apply min-h-[44px] touch-manipulation select-none;
+}
+
+@utility grid-responsive-1-2 {
+  /* Mobile-first responsive grid utilities */
+  @apply grid grid-cols-1 sm:grid-cols-2;
+}
+
+@utility grid-responsive-1-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+@utility grid-responsive-2-4 {
+  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4;
+}
+
+@utility grid-responsive-auto {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+@utility flex-responsive-col {
+  /* Responsive flex utilities */
+  @apply flex flex-col sm:flex-row;
+}
+
+@utility flex-responsive-row {
+  @apply flex flex-row sm:flex-col;
+}
+
+@utility mobile-only {
+  /* Responsive visibility utilities */
+  @apply block sm:hidden;
+}
+
+@utility tablet-up {
+  @apply hidden sm:block;
+}
+
+@utility desktop-only {
+  @apply hidden lg:block;
+}
+
+@utility mobile-tablet {
+  @apply block lg:hidden;
+}
 
 @layer base {
   :root {
@@ -122,258 +442,8 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-@layer components {
-
-  /* Card variants */
-  /* Card variants */
-  .card-interactive {
-    @apply bg-card border border-border shadow-sm rounded-lg transition-all duration-200;
-    @apply hover:border-primary/50 hover:shadow-md;
-  }
-
-  .card-ai {
-    @apply bg-card/40 backdrop-blur-md border border-primary/20 rounded-xl;
-    @apply shadow-xl shadow-primary/5 relative overflow-hidden;
-  }
-
-  .glass {
-    @apply bg-background/40 backdrop-blur-xl border border-white/10 shadow-lg;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  }
-
-  /* Status badges */
-  .badge-success {
-    @apply bg-[hsl(var(--status-success)/0.15)] text-[hsl(var(--status-success))] border-[hsl(var(--status-success)/0.3)];
-  }
-
-  .badge-warning {
-    @apply bg-[hsl(var(--status-warning)/0.15)] text-[hsl(var(--status-warning))] border-[hsl(var(--status-warning)/0.3)];
-  }
-
-  .badge-error {
-    @apply bg-[hsl(var(--status-error)/0.15)] text-[hsl(var(--status-error))] border-[hsl(var(--status-error)/0.3)];
-  }
-
-  .badge-info {
-    @apply bg-[hsl(var(--status-info)/0.15)] text-[hsl(var(--status-info))] border-[hsl(var(--status-info)/0.3)];
-  }
-
-  /* Platform badges */
-  .badge-email {
-    @apply bg-[hsl(var(--platform-email)/0.15)] text-[hsl(var(--platform-email))];
-  }
-
-  .badge-whatsapp {
-    @apply bg-[hsl(var(--platform-whatsapp)/0.15)] text-[hsl(var(--platform-whatsapp))];
-  }
-
-  /* Priority indicators */
-  .priority-high {
-    @apply text-[hsl(var(--priority-high))];
-  }
-
-  .priority-medium {
-    @apply text-[hsl(var(--priority-medium))];
-  }
-
-  .priority-low {
-    @apply text-[hsl(var(--priority-low))];
-  }
-
-  /* AI glow effect */
-  .ai-glow {
-    @apply relative;
-  }
-
-  .ai-glow::before {
-    content: '';
-    @apply absolute inset-0 rounded-lg opacity-20;
-    background: linear-gradient(135deg, hsl(var(--ai-glow)) 0%, transparent 50%);
-    filter: blur(20px);
-    z-index: -1;
-  }
-
-  /* Kanban column */
-  .kanban-column {
-    @apply bg-secondary/40 border border-border/40 rounded-lg p-2 min-h-[200px] max-h-[calc(100vh-280px)] overflow-y-auto;
-  }
-
-  .kanban-column::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .kanban-column::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  .kanban-column::-webkit-scrollbar-thumb {
-    @apply bg-border/50 rounded-full;
-  }
-
-  .kanban-column::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
-  }
-
-  /* Scrollbar styling */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
-  }
-}
-
 @layer utilities {
-
-  /* Smooth transitions */
-  .transition-smooth {
-    @apply transition-all duration-200 ease-out;
-  }
-
-  /* Text gradient */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(262 83% 70%) 100%);
-  }
-
-  /* Subtle hover lift */
-  .hover-lift {
-    @apply transition-transform duration-200;
-  }
-
-  .hover-lift:hover {
-    @apply -translate-y-0.5;
-  }
-
-  /* Responsive typography utilities */
-  .text-responsive-xs {
-    @apply text-xs sm:text-sm;
-  }
-
-  .text-responsive-sm {
-    @apply text-sm sm:text-base;
-  }
-
-  .text-responsive-base {
-    @apply text-base sm:text-lg;
-  }
-
-  .text-responsive-lg {
-    @apply text-lg sm:text-xl;
-  }
-
-  .text-responsive-xl {
-    @apply text-xl sm:text-2xl;
-  }
-
-  .text-responsive-2xl {
-    @apply text-2xl sm:text-3xl;
-  }
-
-  .text-responsive-3xl {
-    @apply text-3xl sm:text-4xl;
-  }
-
-  /* Responsive spacing utilities */
-  .p-responsive-xs {
-    @apply p-2 sm:p-3 md:p-4;
-  }
-
-  .p-responsive-sm {
-    @apply p-3 sm:p-4 md:p-6;
-  }
-
-  .p-responsive-md {
-    @apply p-4 sm:p-6 md:p-8;
-  }
-
-  .p-responsive-lg {
-    @apply p-6 sm:p-8 md:p-10;
-  }
-
-  .m-responsive-xs {
-    @apply m-2 sm:m-3 md:m-4;
-  }
-
-  .m-responsive-sm {
-    @apply m-3 sm:m-4 md:m-6;
-  }
-
-  .m-responsive-md {
-    @apply m-4 sm:m-6 md:m-8;
-  }
-
-  .m-responsive-lg {
-    @apply m-6 sm:m-8 md:m-10;
-  }
-
-  /* Touch-friendly utilities */
-  .touch-target {
-    @apply min-h-[44px] min-w-[44px] touch-manipulation;
-  }
-
-  .touch-input {
-    @apply min-h-[44px] touch-manipulation;
-  }
-
-  .touch-button {
-    @apply min-h-[44px] touch-manipulation select-none;
-  }
-
-  /* Mobile-first responsive grid utilities */
-  .grid-responsive-1-2 {
-    @apply grid grid-cols-1 sm:grid-cols-2;
-  }
-
-  .grid-responsive-1-3 {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
-  }
-
-  .grid-responsive-2-4 {
-    @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4;
-  }
-
-  .grid-responsive-auto {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
-  }
-
-  /* Responsive flex utilities */
-  .flex-responsive-col {
-    @apply flex flex-col sm:flex-row;
-  }
-
-  .flex-responsive-row {
-    @apply flex flex-row sm:flex-col;
-  }
-
-  /* Responsive visibility utilities */
-  .mobile-only {
-    @apply block sm:hidden;
-  }
-
-  .tablet-up {
-    @apply hidden sm:block;
-  }
-
-  .desktop-only {
-    @apply hidden lg:block;
-  }
-
-  .mobile-tablet {
-    @apply block lg:hidden;
+  html {
+    scroll-behavior: smooth;
   }
 }

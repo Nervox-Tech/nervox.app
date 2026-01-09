@@ -18,7 +18,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
   };
 
   return (
-    <header className="h-16 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-sm sticky top-0 z-10">
+    <header className="h-16 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-10">
       <div className="flex items-center gap-2">
         <MobileSidebar />
         <div>
@@ -60,7 +60,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
         </button>
 
         {/* User Avatar */}
-        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-medium text-sm">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-linear-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-medium text-sm">
           U
         </div>
       </div>

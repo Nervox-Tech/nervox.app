@@ -10,7 +10,7 @@ interface EmptyStateProps {
     action?: {
         label: string;
         onClick: () => void;
-        variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+        variant?: "default" | "destructive" | "outline-solid" | "secondary" | "ghost" | "link";
     };
     className?: string;
     iconClassName?: string;

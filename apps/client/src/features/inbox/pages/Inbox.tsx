@@ -195,7 +195,7 @@ function WhatsAppSetup({ onComplete }: { onComplete: () => void }) {
               
               {/* Mock QR Code */}
               <div className="w-48 h-48 mx-auto bg-white rounded-2xl p-4 border border-border flex items-center justify-center">
-                <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
                   <QrCode className="w-16 h-16 text-gray-500" />
                 </div>
               </div>
@@ -236,13 +236,13 @@ function WhatsAppSetup({ onComplete }: { onComplete: () => void }) {
               <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 border border-border">
                 <span className="text-sm text-foreground">Enable AI suggestions</span>
                 <div className="w-10 h-6 bg-platform-whatsapp rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow" />
+                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm" />
                 </div>
               </div>
               <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 border border-border">
                 <span className="text-sm text-foreground">Auto-categorize messages</span>
                 <div className="w-10 h-6 bg-platform-whatsapp rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow" />
+                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm" />
                 </div>
               </div>
             </div>
@@ -322,7 +322,7 @@ function Inbox() {
               <input
                 type="text"
                 placeholder="Search messages..."
-                className="w-full pl-10 pr-4 py-2.5 bg-secondary/50 rounded-xl text-sm border border-border/50 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="w-full pl-10 pr-4 py-2.5 bg-secondary/50 rounded-xl text-sm border border-border/50 focus:outline-hidden focus:ring-2 focus:ring-primary/50"
               />
             </div>
           </div>
@@ -465,7 +465,7 @@ function Inbox() {
                   value={draftContent}
                   onChange={(e) => setDraftContent(e.target.value)}
                   onClick={() => setIsEditingDraft(true)}
-                  className="w-full bg-transparent border-none focus:outline-none text-sm resize-none min-h-[80px]"
+                  className="w-full bg-transparent border-none focus:outline-hidden text-sm resize-none min-h-[80px]"
                   placeholder="Write your reply..."
                 />
               </div>
