@@ -52,15 +52,6 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
 
 @utility card-interactive {
   /* Card variants */
@@ -93,7 +84,7 @@
 }
 
 @utility badge-error {
-  @apply bg-[hsl(var(--status-error)/0.15)] text-[hsl(var(--status-error))] border-[hsl(var(--status-error)/0.3)];
+  @apply bg-[hsl(var(--status-error)/0.15)] text-[hsl(var(--status-error))]     border-[hsl(var(--status-error)/0.3)];
 }
 
 @utility badge-info {
@@ -431,14 +422,19 @@
     --ai-glow: 217 91% 60%;
     --ai-surface: 217 91% 30%;
   }
-}
-
-@layer base {
+  
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
 }
 
