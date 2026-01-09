@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   Search,
   MoreHorizontal,
@@ -14,17 +13,14 @@ import {
   Clock,
   Settings2,
   MessageSquare,
-  Smartphone,
-  Shield,
   ArrowRight,
-  QrCode,
-  Check,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
-import { TopBar } from '@/shared/layout/NavBar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card';
+import { Card, CardContent } from '@/shared/components/ui/card';
+import { Link } from 'react-router-dom';
+import ROUTE_PATH from '@/shared/constant/route';
 
 // Types
 type ThreadType = 'email' | 'whatsapp';
@@ -87,202 +83,18 @@ const threads: Thread[] = [
   },
 ];
 
-// WhatsApp Setup Component
-function WhatsAppSetup({ onComplete }: { onComplete: () => void }) {
-  const [step, setStep] = useState(1);
-  
-  const steps = [
-    { num: 1, title: 'Connect', desc: 'Link your WhatsApp' },
-    { num: 2, title: 'Verify', desc: 'Scan QR code' },
-    { num: 3, title: 'Configure', desc: 'Set preferences' },
-  ];
 
-  return (
-    <Card className="max-w-2xl mx-auto">
-      <CardHeader className="text-center pb-2">
-        <div className="w-16 h-16 rounded-2xl bg-platform-whatsapp/10 flex items-center justify-center mx-auto mb-4">
-          <MessageSquare className="w-8 h-8 text-platform-whatsapp" />
-        </div>
-        <CardTitle className="text-xl">Connect WhatsApp</CardTitle>
-        <p className="text-sm text-muted-foreground mt-1">
-          Sync your WhatsApp messages to manage conversations with AI
-        </p>
-      </CardHeader>
-      
-      <CardContent className="space-y-6">
-        {/* Progress Steps */}
-        <div className="flex items-center justify-center gap-2">
-          {steps.map((s, i) => (
-            <div key={s.num} className="flex items-center">
-              <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors",
-                step >= s.num 
-                  ? "bg-platform-whatsapp text-white" 
-                  : "bg-secondary text-muted-foreground"
-              )}>
-                {step > s.num ? <Check className="w-4 h-4" /> : s.num}
-              </div>
-              {i < steps.length - 1 && (
-                <div className={cn(
-                  "w-12 h-0.5 mx-1",
-                  step > s.num ? "bg-platform-whatsapp" : "bg-border"
-                )} />
-              )}
-            </div>
-          ))}
-        </div>
-
-        {step === 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-4 rounded-xl border border-border bg-secondary/30 flex items-start gap-3">
-                <Shield className="w-5 h-5 text-platform-whatsapp shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">End-to-end Encrypted</p>
-                  <p className="text-xs text-muted-foreground">Your messages stay private</p>
-                </div>
-              </div>
-              <div className="p-4 rounded-xl border border-border bg-secondary/30 flex items-start gap-3">
-                <Sparkles className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">AI-Powered Replies</p>
-                  <p className="text-xs text-muted-foreground">Smart response suggestions</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-muted/50 border border-border">
-              <h4 className="text-sm font-medium mb-2">What you'll get:</h4>
-              <ul className="space-y-2">
-                {[
-                  'View all WhatsApp messages in one place',
-                  'AI-generated reply suggestions',
-                  'Convert messages to tasks instantly',
-                  'Auto-organize by priority and sender',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Check className="w-4 h-4 text-platform-whatsapp" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <Button 
-              className="w-full gap-2 bg-platform-whatsapp hover:bg-platform-whatsapp/90" 
-              onClick={() => setStep(2)}
-            >
-              <Smartphone className="w-4 h-4" />
-              Connect WhatsApp
-            </Button>
-          </motion.div>
-        )}
-
-        {step === 2 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-4">
-                Open WhatsApp on your phone and scan this QR code
-              </p>
-              
-              {/* Mock QR Code */}
-              <div className="w-48 h-48 mx-auto bg-white rounded-2xl p-4 border border-border flex items-center justify-center">
-                <div className="w-full h-full bg-linear-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                  <QrCode className="w-16 h-16 text-gray-500" />
-                </div>
-              </div>
-              
-              <p className="text-xs text-muted-foreground mt-4">
-                Go to WhatsApp → Settings → Linked Devices → Link a Device
-              </p>
-            </div>
-
-            <div className="flex gap-2">
-              <Button variant="outline" className="flex-1" onClick={() => setStep(1)}>
-                Back
-              </Button>
-              <Button className="flex-1 gap-2 bg-platform-whatsapp hover:bg-platform-whatsapp/90" onClick={() => setStep(3)}>
-                I've Scanned
-              </Button>
-            </div>
-          </motion.div>
-        )}
-
-        {step === 3 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
-          >
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-platform-whatsapp/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-8 h-8 text-platform-whatsapp" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">Connected!</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                Your WhatsApp is now linked to your inbox
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 border border-border">
-                <span className="text-sm text-foreground">Enable AI suggestions</span>
-                <div className="w-10 h-6 bg-platform-whatsapp rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm" />
-                </div>
-              </div>
-              <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 border border-border">
-                <span className="text-sm text-foreground">Auto-categorize messages</span>
-                <div className="w-10 h-6 bg-platform-whatsapp rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm" />
-                </div>
-              </div>
-            </div>
-
-            <Button className="w-full" onClick={onComplete}>
-              Start Using Inbox
-            </Button>
-          </motion.div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
 
 function Inbox() {
   const [activeThreadId, setActiveThreadId] = useState<string>('1');
   const [isEditingDraft, setIsEditingDraft] = useState(false);
   const [draftContent, setDraftContent] = useState('');
-  const [showWhatsAppSetup, setShowWhatsAppSetup] = useState(false);
-  const [whatsAppConnected, setWhatsAppConnected] = useState(false);
 
   const activeThread = threads.find(t => t.id === activeThreadId) || threads[0];
 
   // Initialize draft when thread changes
   if (activeThread && activeThread.aiDraft !== draftContent && !isEditingDraft) {
     setDraftContent(activeThread.aiDraft);
-  }
-
-  if (showWhatsAppSetup) {
-    return (
-      <div className="h-screen flex flex-col bg-background">
-        <TopBar title="Inbox" />
-        <div className="flex-1 flex items-center justify-center p-4 md:p-8">
-          <WhatsAppSetup onComplete={() => {
-            setWhatsAppConnected(true);
-            setShowWhatsAppSetup(false);
-          }} />
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -300,10 +112,9 @@ function Inbox() {
             </div>
 
             {/* WhatsApp Connect Banner */}
-            {!whatsAppConnected && (
+            <Link to={ROUTE_PATH.INBOX.WHATSAPP}>
               <button
-                onClick={() => setShowWhatsAppSetup(true)}
-                className="w-full p-3 rounded-xl border border-platform-whatsapp/30 bg-platform-whatsapp/5 flex items-center gap-3 hover:bg-platform-whatsapp/10 transition-colors text-left"
+                className="w-full p-3 rounded-xl border border-platform-whatsapp/30 bg-platform-whatsapp/5 flex items-center gap-3 hover:bg-platform-whatsapp/10 transition-colors text-left mb-4 cursor-pointer"
               >
                 <div className="p-2 bg-platform-whatsapp/20 rounded-lg">
                   <MessageSquare className="w-4 h-4 text-platform-whatsapp" />
@@ -314,7 +125,7 @@ function Inbox() {
                 </div>
                 <ArrowRight className="w-4 h-4 text-muted-foreground" />
               </button>
-            )}
+            </Link>
 
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />

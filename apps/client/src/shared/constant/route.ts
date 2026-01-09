@@ -4,9 +4,7 @@ const ROUTE_PATH = {
     DASHBOARD: '/',
     INBOX: {
       INDEX: '/inbox',
-      CREATE: '/inbox/create',
-      DETAILS: '/inbox/:id',
-      EDIT: '/inbox/:id/edit'
+      WHATSAPP: '/inbox/setup/whatsapp'
     },
     TASKS: '/tasks',
     PROJECTS: '/projects',

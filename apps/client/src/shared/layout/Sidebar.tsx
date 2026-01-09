@@ -10,6 +10,7 @@ import { useAppStore } from '@/shared/stores/appStore';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
 import { SidebarNavItem } from '../components/Layout/SidebarNavItem';
 import ROUTE_PATH from '../constant/route';
+import { Images } from '../assets';
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: Grid, href: ROUTE_PATH.DASHBOARD },
@@ -37,7 +38,7 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="mb-8 px-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl shrink-0">
-            <img src="" alt="" />
+            <img src={Images.LOGO} alt="" />
           </div>
           <span className="font-bold text-lg whitespace-nowrap overflow-hidden">
             Nervox

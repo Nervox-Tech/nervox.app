@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { SidebarItem } from '@/shared/types/sidebar.types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   item: SidebarItem;
@@ -13,8 +13,29 @@ interface Props {
 }
 
 export function SidebarNavItem({ item, activeView, setActiveView, unreadCount }: Props) {
-  const isActive = activeView === item.id;
+  const location = useLocation();
+  
+  // Check if current route matches this item
+  // Better route matching logic
+  const isActive = (() => {
+    if (!item.href) {
+      return activeView === item.id;
+    }
+    
+    const currentPath = location.pathname;
+    const itemPath = item.href;
+    
+    // Exact match for dashboard/root
+    if (itemPath === '/') {
+      return currentPath === '/';
+    }
+    
+    // For other routes, check if it starts with the path and is followed by / or end of string
+    // This prevents /inbox from matching /in or /i
+    return currentPath === itemPath || currentPath.startsWith(itemPath + '/');
+  })();
 
+  
   const badgeCount = item.id === 'inbox' && unreadCount > 0 ? unreadCount : undefined;
 
   
