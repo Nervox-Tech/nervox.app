@@ -25,4 +25,5 @@ export interface Message {
   text: string;
   timestamp: string;
   isMe: boolean;
+  attachments?: { name: string; url: string; type: 'image' | 'file' }[];
 }

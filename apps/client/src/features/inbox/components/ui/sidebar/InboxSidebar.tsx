@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 import { useInboxStore } from "@/features/inbox/store/useInboxStore";
 
 const InboxSidebar = () => {
-    const { threads } = useInboxStore();
+    const threads = useInboxStore((state) => state.threads);
 
     return (
-        <div className="w-80 border-r border-border flex flex-col bg-background hidden md:flex h-full">
+        <div className="h-full flex flex-col bg-background">
             <div className="p-4 space-y-4 shrink-0">
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-foreground">Messages</h2>

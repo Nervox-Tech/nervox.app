@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Badge } from "@/shared/components/ui/badge";
 import { Mail, MessageCircle } from "lucide-react";
 import type { Thread } from "@/features/inbox/types";
 import { useInboxStore } from "@/features/inbox/store/useInboxStore";
@@ -9,7 +8,8 @@ interface InboxCardProps {
 }
 
 const InboxCard = ({ thread }: InboxCardProps) => {
-  const { activeThreadId, setActiveThreadId } = useInboxStore();
+  const activeThreadId = useInboxStore((state) => state.activeThreadId);
+  const setActiveThreadId = useInboxStore((state) => state.setActiveThreadId);
   const isActive = activeThreadId === thread.id;
 
   return (
@@ -45,14 +45,14 @@ const InboxCard = ({ thread }: InboxCardProps) => {
       <p className="text-xs text-muted-foreground line-clamp-2">{thread.lastMessage}</p>
 
       <div className="flex gap-1.5">
-        <Badge variant="outline" className={cn(
+        {/*<Badge variant="outline" className={cn(
           "text-[10px] h-5 px-1.5 font-normal border-0",
           thread.classification === 'sales' && "bg-platform-email/10 text-platform-email",
           thread.classification === 'urgent' && "bg-priority-high/10 text-priority-high",
           thread.classification === 'support' && "bg-status-warning/10 text-status-warning"
         )}>
           {thread.classification}
-        </Badge>
+        </Badge>*/}
       </div>
     </button>
   );
