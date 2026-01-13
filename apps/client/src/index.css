@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
@@ -98,19 +97,6 @@
 
 @utility badge-whatsapp {
   @apply bg-[hsl(var(--platform-whatsapp)/0.15)] text-[hsl(var(--platform-whatsapp))];
-}
-
-@utility priority-high {
-  /* Priority indicators */
-  @apply text-[hsl(var(--priority-high))];
-}
-
-@utility priority-medium {
-  @apply text-[hsl(var(--priority-medium))];
-}
-
-@utility priority-low {
-  @apply text-[hsl(var(--priority-low))];
 }
 
 @utility ai-glow {

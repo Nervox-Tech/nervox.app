@@ -20,7 +20,7 @@ function Inbox() {
 
         {/* MAIN - Message Thread */}
         <div className={cn(
-          "flex-1 flex-col bg-secondary/20 w-full h-full transition-all bg-background font-sans min-w-0",
+          "flex-1 flex-col bg-secondary/20 w-full h-full transition-all font-sans min-w-0",
           mobileView === 'thread' ? 'flex' : 'hidden md:flex'
         )}>
           <MessageThread />

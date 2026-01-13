@@ -1,10 +1,9 @@
-
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useInboxStore } from './useInboxStore';
 import { act } from 'react';
 
 // Mock URL.createObjectURL
-global.URL.createObjectURL = vi.fn(() => 'mock-url');
+globalThis.URL.createObjectURL = vi.fn(() => 'mock-url');
 
 describe('useInboxStore', () => {
     // Reset store before each test

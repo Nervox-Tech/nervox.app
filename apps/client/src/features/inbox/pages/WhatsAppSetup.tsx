@@ -155,7 +155,7 @@ function WhatsAppSetup() {
                   "Auto-organize by priority and sender",
                 ].map((t) => (
                   <li key={t} className="flex gap-2">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" /> {t}
+                    <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {t}
                   </li>
                 ))}
               </ul>
