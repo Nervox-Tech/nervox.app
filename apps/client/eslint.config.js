@@ -22,7 +22,15 @@ export default defineConfig([
             globals: globals.browser
         },
         rules: {
-            'no-console': 'error'
+            'no-console': 'error',
+            "@typescript-eslint/no-unused-vars": [
+                "warn", 
+                {
+                    "argsIgnorePattern": "^_",
+                    "varsIgnorePattern": "^_",
+                    "caughtErrorsIgnorePattern": "^_"
+                }
+            ]
         }
     }
 ])

@@ -1,8 +1,10 @@
-import { type ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import Sidebar  from './Sidebar';
 import { MobileNav } from './mobile-view/MobileNav';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
 import { cn } from '@/lib/utils';
+import { TopBar } from './NavBar';
+import { Fallback } from '../components/Fallback';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -14,6 +16,7 @@ export function Layout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       
+      <TopBar />
       {/* Desktop/Tablet Sidebar */}
       {!isMobile && <Sidebar />}
       
@@ -29,7 +32,10 @@ export function Layout({ children }: MainLayoutProps) {
         // Responsive padding
         "px-4 sm:px-6 lg:px-8"
       )}>
-        {children}
+        <Suspense fallback={<Fallback />}>
+        
+          {children}
+        </Suspense>
       </main>
     </div>
   );
