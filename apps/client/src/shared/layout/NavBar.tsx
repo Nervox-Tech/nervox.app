@@ -18,7 +18,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
   };
 
   return (
-    <header className="h-14 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-10">
+    <header className="h-14 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-20">
       <div className="flex items-center gap-2">
         <MobileSidebar />
         <div>

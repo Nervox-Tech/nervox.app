@@ -67,11 +67,14 @@ export interface ExternalDocument {
   projectId?: string;
 }
 
+export type ProjectStatus = 'active' | 'upcoming' | 'completed' | 'on-hold';
+
 export interface Project {
   id: string;
   name: string;
   description: string;
   color: string;
+  status: ProjectStatus;
   startDate?: Date;
   endDate?: Date;
   createdAt: Date;
@@ -119,7 +122,7 @@ interface AppState {
   projects: Project[];
   selectedProject: Project | null;
   setSelectedProject: (project: Project | null) => void;
-  addProject: (project: Omit<Project, 'id' | 'createdAt'>) => string;
+  addProject: (project: Omit<Project, 'id' | 'createdAt' | 'status'> & { status?: ProjectStatus }) => string;
   updateProject: (id: string, updates: Partial<Project>) => void;
   deleteProject: (id: string) => void;
 
@@ -317,6 +320,7 @@ const mockProjects: Project[] = [
     description:
       'Main project for Q4 product launch including all related tasks and documentation.',
     color: '#8B5CF6',
+    status: 'active',
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // 30 days ago
     endDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 60), // 60 days from now
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30),
@@ -327,6 +331,7 @@ const mockProjects: Project[] = [
     name: 'Process Improvement',
     description: 'Ongoing initiative to improve internal processes and workflows.',
     color: '#10B981',
+    status: 'active',
     startDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 60), // 60 days ago
     endDate: undefined, // Ongoing project
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 60),
@@ -465,8 +470,9 @@ export const useAppStore = create<AppState>((set) => ({
   selectedProject: null,
   setSelectedProject: (project) => set({ selectedProject: project }),
   addProject: (project) => {
-    const newProject = {
+    const newProject: Project = {
       ...project,
+      status: project.status || 'active',
       id: crypto.randomUUID(),
       createdAt: new Date(),
     };

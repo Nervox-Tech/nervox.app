@@ -1,1 +1,1 @@
-export { default as ProjectIndex } from './pages/ProjectsView';
+export { default as ProjectsView } from './pages/ProjectsView';

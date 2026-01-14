@@ -1,115 +1,64 @@
-import { CheckSquare, FileText, Lightbulb, BarChart3, FolderKanban } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { FolderKanban, Plus } from 'lucide-react';
+import { Button } from '@/shared/components/ui/button';
+import { ProjectGrid } from '@/features/projects/components/grid/ProjectGrid';
+import { ProjectSidePanel } from '@/features/projects/components/side-panel/ProjectDetailsSidePanel';
 import { useAppStore } from '@/shared/stores/appStore';
-import { cn } from '@/lib/utils';
-import { CreateProjectDialog } from '../components/dialog/CreateProjectDialog'; 
-import { ProjectGrid } from '../components/ProjectGrid';
-import { ProjectSidePanel } from '../components/ProjectDetailsSidePanel';
-import { Card, CardContent } from '@/shared/components/ui/card';
+import type { Project } from '@/shared/stores/appStore';
 
-function ProjectsView() {
-  const { projects, tasks, ideas, externalDocuments, selectedProject, setSelectedProject } =
-    useAppStore();
+export default function ProjectsView() {
+  const {
+    projects,
+    selectedProject,
+    setSelectedProject
+  } = useAppStore();
 
-  // Dynamic stats
-  const totalTasks = tasks.length;
-  const inProgressTasks = tasks.filter((t) => t.status === 'today').length;
-  const activeIdeas = ideas.length;
-  const totalDocs = externalDocuments.length;
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+  const [panelMode, setPanelMode] = useState<'view' | 'create'>('view');
 
-  const stats = [
-    {
-      label: 'Total Tasks',
-      value: totalTasks,
-      icon: CheckSquare,
-      color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/20',
-    },
-    {
-      label: 'In Progress',
-      value: inProgressTasks,
-      icon: BarChart3,
-      color: 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/20',
-    },
-    {
-      label: 'Active Ideas',
-      value: activeIdeas,
-      icon: Lightbulb,
-      color: 'text-purple-500 bg-purple-100 dark:bg-purple-900/20',
-    },
-    {
-      label: 'Documents',
-      value: totalDocs,
-      icon: FileText,
-      color: 'text-green-500 bg-green-100 dark:bg-green-900/20',
-    },
-  ];
+  const handleNewProject = () => {
+    setSelectedProject(null);
+    setPanelMode('create');
+    setIsSidePanelOpen(true);
+  };
+
+  const handleProjectSelect = (project: Project) => {
+    setSelectedProject(project);
+    setPanelMode('view');
+    setIsSidePanelOpen(true);
+  };
 
   return (
-    <div className="h-screen flex flex-col bg-background">
-      <div className="flex-1 p-4 md:p-6">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <Card className="hover:border-primary/30 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <div className={cn('p-2.5 rounded-xl', stat.color.split(' ')[1])}>
-                      <stat.icon className={cn('w-5 h-5', stat.color.split(' ')[0])} />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-foreground"> {stat.value} </p>
-                      <p className="text-xs text-muted-foreground"> {stat.label} </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Header with Create Button */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-foreground"> All Projects </h2>
-          <div className="flex gap-2">
-            <CreateProjectDialog />
+    <div className="flex flex-col h-full ">
+      {/* Header section */}
+      <div className="flex items-center justify-between p-6 bg-background/40 backdrop-blur-sm border-b border-border/50 sticky top-0 z-10">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-primary/10 rounded-2xl">
+            <FolderKanban className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-medium text-foreground">Projects</h1>
+            <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">{projects.length} Total Initiatives</p>
           </div>
         </div>
-
-        {/* Enhanced Project Grid */}
-        {projects.length > 0 ? (
-          <ProjectGrid />
-        ) : (
-          <div className="text-center py-16">
-            <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-4">
-              <FolderKanban className="w-8 h-8 text-muted-foreground" />
-            </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2"> No projects yet </h3>
-            <p className="text-sm text-muted-foreground mb-6">
-              {' '}
-              Create your first project to start organizing your work{' '}
-            </p>
-            <div className="flex gap-2 justify-center">
-              <CreateProjectDialog />
-            </div>
-          </div>
-        )}
+        <Button onClick={handleNewProject} className="gap-2 rounded-xl h-12 px-6 shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+          <Plus className="w-5 h-5 font-black" />
+          <span className="font-bold">New Project</span>
+        </Button>
       </div>
 
-      {/* Project Side Panel */}
+      <div className="flex-1 overflow-auto custom-scrollbar">
+        <div className="p-6 md:p-8 max-w-(--breakpoint-2xl) mx-auto w-full">
+          <ProjectGrid onProjectSelect={handleProjectSelect} />
+        </div>
+      </div>
+
       <ProjectSidePanel
+        isOpen={isSidePanelOpen}
+        onClose={() => setIsSidePanelOpen(false)}
         project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
+        initialMode={panelMode}
       />
     </div>
   );
 }
-
-
-export default ProjectsView;
