@@ -19,7 +19,6 @@ export function SimplifiedTaskCreation({
   onTaskCreated, 
   defaultProjectId, 
   className,
-  placeholder = "Add a new task..."
 }: SimplifiedTaskCreationProps) {
   const { addTask } = useAppStore();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -95,42 +94,8 @@ export function SimplifiedTaskCreation({
     setSubtasks(subtasks.filter((_, i) => i !== index));
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      if (!isExpanded && title.trim()) {
-        handleSubmit(e);
-      } else if (!isExpanded) {
-        setIsExpanded(true);
-      }
-    }
-    if (e.key === 'Escape') {
-      resetForm();
-    }
-  };
-
   return (
     <div className={cn("space-y-3", className)}>
-      {/* Quick Input */}
-      <div className="flex gap-2">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onFocus={() => !isExpanded && title && setIsExpanded(true)}
-          placeholder={placeholder}
-          className="flex-1 bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 min-h-[44px] touch-manipulation"
-        />
-        <Button 
-          onClick={handleSubmit} 
-          size="sm" 
-          className="px-4 min-h-[44px] touch-manipulation"
-          disabled={!title.trim()}
-        >
-          <Plus className="w-4 h-4" />
-        </Button>
-      </div>
 
       {/* Expanded Form */}
       {isExpanded && (
