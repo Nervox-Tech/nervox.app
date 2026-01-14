@@ -32,14 +32,17 @@ export function ProjectSidePanel({
     const [endDate, setEndDate] = useState<Date | undefined>(undefined);
     const [hasBeenManuallyStatused, setHasBeenManuallyStatused] = useState(false);
 
-    // Prev project state for syncing
+    // Prev project state for syncing (stabilize types to null)
     const [prevProjectId, setPrevProjectId] = useState<string | null>(project?.id ?? null);
     const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+    const [prevInitialMode, setPrevInitialMode] = useState(initialMode);
 
-    // Sync state if project or open status changes (Render phase sync)
-    if (isOpen !== prevIsOpen || project?.id !== prevProjectId) {
+    // Sync state if project, mode prop, or open status changes (Render phase sync)
+    const currentProjectId = project?.id ?? null;
+    if (isOpen !== prevIsOpen || currentProjectId !== prevProjectId || initialMode !== prevInitialMode) {
         setPrevIsOpen(isOpen);
-        setPrevProjectId(project?.id ?? null);
+        setPrevProjectId(currentProjectId);
+        setPrevInitialMode(initialMode);
 
         const nextMode = project ? initialMode : 'create';
         setMode(nextMode);
