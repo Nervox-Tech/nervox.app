@@ -23,8 +23,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui
 import AuthStatus from '@/features/auth/components/AuthStatus';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { SimplifiedTaskCreation } from '../components/SimplifiedTaskCreation';
-
-import { TopBar } from '@/shared/layout/NavBar';
 import { EmptyState } from '@/shared/components/ui/empty-state';
 import { Button } from '@/shared/components/ui/button';
 
