@@ -23,14 +23,11 @@ export function TopBar({ title, subtitle }: TopBarProps) {
         <MobileSidebar />
         <div>
           <h1 className="text-lg sm:text-xl font-semibold text-foreground">{title}</h1>
-          {subtitle && (
-            <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>}
         </div>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-
         {/* AI Quick Action */}
         <motion.button
           whileHover={{ scale: 1.05 }}

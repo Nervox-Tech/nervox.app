@@ -14,13 +14,13 @@ export class AuthUtils {
     Cookies.set(TOKEN_KEY, authResponse.token, {
       expires: 7, // 7 days
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      sameSite: 'strict',
     });
 
     Cookies.set(REFRESH_TOKEN_KEY, authResponse.refreshToken, {
       expires: 30, // 30 days
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
+      sameSite: 'strict',
     });
 
     // Store user data in localStorage for easy access
@@ -54,7 +54,7 @@ export class AuthUtils {
       return {
         ...user,
         createdAt: new Date(user.createdAt),
-        lastLoginAt: new Date(user.lastLoginAt)
+        lastLoginAt: new Date(user.lastLoginAt),
       };
     } catch (_error) {
       // console.error('Error parsing stored user data:', error);
@@ -88,9 +88,15 @@ export class AuthUtils {
       // Handle real JWT structure
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
+      const jsonPayload = decodeURIComponent(
+        window
+          .atob(base64)
+          .split('')
+          .map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join('')
+      );
       return JSON.parse(jsonPayload);
     } catch (_e) {
       return null;
@@ -146,15 +152,15 @@ export class AuthUtils {
    * Generate a mock JWT token for development/testing
    */
   static generateMockToken(userId: string): string {
-    const payload : UserToken = {
+    const payload: UserToken = {
       userId,
-      exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60), // 7 days
-      iat: Math.floor(Date.now() / 1000)
+      exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60, // 7 days
+      iat: Math.floor(Date.now() / 1000),
     };
 
-    const header = btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const body = btoa(JSON.stringify(payload));
-    const signature = "mock_signature";
+    const signature = 'mock_signature';
 
     return `${header}.${body}.${signature}`;
   }

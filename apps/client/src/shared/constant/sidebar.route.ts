@@ -1,14 +1,6 @@
 // sidebar-items.ts
-import {
-  Inbox,
-  CheckSquare,
-  FileText,
-  FolderKanban,
-  Settings,
-  Grid,
-} from 'lucide-react';
+import { Inbox, CheckSquare, FileText, FolderKanban, Settings, Grid } from 'lucide-react';
 import type { SidebarItem } from '@/shared/types/sidebar.types';
-
 
 export const navItems: SidebarItem[] = [
   {

@@ -1,6 +1,6 @@
-import { Badge } from "@/shared/components/ui/badge";
-import { Card, CardContent } from "@/shared/components/ui/card";
-import { CheckCircle2, Mail } from "lucide-react";
+import { Badge } from '@/shared/components/ui/badge';
+import { Card, CardContent } from '@/shared/components/ui/card';
+import { CheckCircle2, Mail } from 'lucide-react';
 
 export const RightSidebar = () => {
   return (
@@ -34,7 +34,9 @@ export const RightSidebar = () => {
             <CardContent className="p-3 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Auto-reply</span>
-                <Badge variant="outline" className="text-xs">On</Badge>
+                <Badge variant="outline" className="text-xs">
+                  On
+                </Badge>
               </div>
               <p className="text-xs text-muted-foreground">Working hours only</p>
             </CardContent>

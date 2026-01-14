@@ -1,10 +1,5 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/shared/components/ui/card";
-import { Button } from "@/shared/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from '@/shared/components/ui/card';
+import { Button } from '@/shared/components/ui/button';
 import {
   ArrowLeft,
   Check,
@@ -14,11 +9,11 @@ import {
   Shield,
   Smartphone,
   Sparkles,
-} from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import FeatureCard from "@/features/inbox/components/ui/FeatureCard";
-import ROUTE_PATH from "@/shared/constant/route";
-import { useNavigate } from "react-router-dom";
+} from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import FeatureCard from '@/features/inbox/components/ui/FeatureCard';
+import ROUTE_PATH from '@/shared/constant/route';
+import { useNavigate } from 'react-router-dom';
 
 const QR_TIMEOUT = 60;
 
@@ -29,9 +24,9 @@ function WhatsAppSetup() {
 
   const steps = useMemo(
     () => [
-      { num: 1, title: "Connect", desc: "Link your WhatsApp" },
-      { num: 2, title: "Verify", desc: "Scan QR code" },
-      { num: 3, title: "Configure", desc: "Set preferences" },
+      { num: 1, title: 'Connect', desc: 'Link your WhatsApp' },
+      { num: 2, title: 'Verify', desc: 'Scan QR code' },
+      { num: 3, title: 'Configure', desc: 'Set preferences' },
     ],
     []
   );
@@ -39,15 +34,14 @@ function WhatsAppSetup() {
   const navigate = useNavigate();
   const goNext = useCallback((nextStep: number) => {
     if (nextStep === 2) {
-        setQrTimer(QR_TIMEOUT);
-        setQrExpired(false);
-      }
+      setQrTimer(QR_TIMEOUT);
+      setQrExpired(false);
+    }
     setStep((s) => s + 1);
   }, []);
   const goBack = useCallback(() => setStep((s) => s - 1), []);
   const reset = useCallback(() => setStep(1), []);
 
-  
   /* QR Timer */
   useEffect(() => {
     if (step !== 2) return;
@@ -69,7 +63,7 @@ function WhatsAppSetup() {
   }, [step]);
 
   const handleBackToInbox = useCallback(() => {
-    navigate(ROUTE_PATH.INBOX.INDEX)
+    navigate(ROUTE_PATH.INBOX.INDEX);
   }, [navigate]);
 
   return (
@@ -104,15 +98,15 @@ function WhatsAppSetup() {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
                       step >= s.num
-                        ? "bg-primary text-primary-foreground shadow-lg"
-                        : "bg-muted text-muted-foreground"
+                        ? 'bg-primary text-primary-foreground shadow-lg'
+                        : 'bg-muted text-muted-foreground'
                     }`}
                   >
                     {step > s.num ? <Check className="w-5 h-5" /> : s.num}
                   </div>
                   <p
                     className={`mt-2 text-xs font-medium ${
-                      step >= s.num ? "text-primary" : "text-muted-foreground"
+                      step >= s.num ? 'text-primary' : 'text-muted-foreground'
                     }`}
                   >
                     {s.title}
@@ -123,7 +117,7 @@ function WhatsAppSetup() {
                 {i < steps.length - 1 && (
                   <div
                     className={`w-16 h-1 mx-2 mb-12 rounded-full ${
-                      step > s.num ? "bg-primary" : "bg-muted"
+                      step > s.num ? 'bg-primary' : 'bg-muted'
                     }`}
                   />
                 )}
@@ -149,10 +143,10 @@ function WhatsAppSetup() {
 
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {[
-                  "View all WhatsApp messages in one place",
-                  "AI-generated reply suggestions",
-                  "Convert messages to tasks instantly",
-                  "Auto-organize by priority and sender",
+                  'View all WhatsApp messages in one place',
+                  'AI-generated reply suggestions',
+                  'Convert messages to tasks instantly',
+                  'Auto-organize by priority and sender',
                 ].map((t) => (
                   <li key={t} className="flex gap-2">
                     <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {t}
@@ -160,10 +154,7 @@ function WhatsAppSetup() {
                 ))}
               </ul>
 
-              <Button
-                onClick={() => goNext(3)}
-                className="w-full py-6"
-              >
+              <Button onClick={() => goNext(3)} className="w-full py-6">
                 <Smartphone className="w-5 h-5 mr-2" />
                 Connect WhatsApp
               </Button>
@@ -179,12 +170,10 @@ function WhatsAppSetup() {
 
               <p
                 className={`text-xs font-medium ${
-                  qrExpired ? "text-destructive" : "text-muted-foreground"
+                  qrExpired ? 'text-destructive' : 'text-muted-foreground'
                 }`}
               >
-                {qrExpired
-                  ? "QR expired. Refresh to continue."
-                  : `Expires in ${qrTimer}s`}
+                {qrExpired ? 'QR expired. Refresh to continue.' : `Expires in ${qrTimer}s`}
               </p>
 
               <div className="flex justify-center gap-2">
@@ -202,11 +191,7 @@ function WhatsAppSetup() {
                 <Button variant="outline" className="flex-1" onClick={goBack}>
                   Back
                 </Button>
-                <Button
-                  className="flex-1"
-                  disabled={qrExpired}
-                  onClick={() => goNext(3)}
-                >
+                <Button className="flex-1" disabled={qrExpired} onClick={() => goNext(3)}>
                   I've Scanned It
                 </Button>
               </div>
@@ -221,13 +206,9 @@ function WhatsAppSetup() {
               </div>
 
               <h3 className="text-xl font-bold">Connected Successfully!</h3>
-              <p className="text-sm text-muted-foreground">
-                Your WhatsApp is now linked
-              </p>
+              <p className="text-sm text-muted-foreground">Your WhatsApp is now linked</p>
 
-              <Button className="w-full py-6">
-                Start Using Inbox
-              </Button>
+              <Button className="w-full py-6">Start Using Inbox</Button>
 
               <Button variant="ghost" onClick={reset}>
                 Start Over

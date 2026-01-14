@@ -10,14 +10,10 @@ export default function AuthStatus() {
 
   return (
     <div className="flex items-center space-x-2">
-      <Badge variant={isAuthenticated ? "default" : "destructive"}>
-        {isAuthenticated ? "Authenticated" : "Not Authenticated"}
+      <Badge variant={isAuthenticated ? 'default' : 'destructive'}>
+        {isAuthenticated ? 'Authenticated' : 'Not Authenticated'}
       </Badge>
-      {user && (
-        <Badge variant="outline">
-          {user.email}
-        </Badge>
-      )}
+      {user && <Badge variant="outline">{user.email}</Badge>}
     </div>
   );
 }
