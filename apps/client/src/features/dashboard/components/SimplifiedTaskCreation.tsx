@@ -15,11 +15,11 @@ interface SimplifiedTaskCreationProps {
   placeholder?: string;
 }
 
-export function SimplifiedTaskCreation({ 
-  onTaskCreated, 
-  defaultProjectId, 
+export function SimplifiedTaskCreation({
+  onTaskCreated,
+  defaultProjectId,
   className,
-  placeholder = "Add a new task..."
+  placeholder = 'Add a new task...',
 }: SimplifiedTaskCreationProps) {
   const { addTask } = useAppStore();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,12 +35,12 @@ export function SimplifiedTaskCreation({
     const now = new Date();
     const tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    
+
     // If no start date set, default to today
     if (!startDate) {
       setStartDate(now);
     }
-    
+
     // If no end date set and we have a start date, default to 3 days later
     if (!endDate && startDate) {
       const defaultEnd = new Date(startDate);
@@ -66,7 +66,7 @@ export function SimplifiedTaskCreation({
       tags: subtasks.length > 0 ? ['has-subtasks'] : [],
       displayId: 'TSK-New', // Will be overridden by store
       priority: 'medium', // Smart default - will be calculated by store based on dates
-      projectId: defaultProjectId
+      projectId: defaultProjectId,
     });
 
     // Reset form
@@ -110,7 +110,7 @@ export function SimplifiedTaskCreation({
   };
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn('space-y-3', className)}>
       {/* Quick Input */}
       <div className="flex gap-2">
         <input
@@ -122,9 +122,9 @@ export function SimplifiedTaskCreation({
           placeholder={placeholder}
           className="flex-1 bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 min-h-[44px] touch-manipulation"
         />
-        <Button 
-          onClick={handleSubmit} 
-          size="sm" 
+        <Button
+          onClick={handleSubmit}
+          size="sm"
           className="px-4 min-h-[44px] touch-manipulation"
           disabled={!title.trim()}
         >
@@ -134,10 +134,15 @@ export function SimplifiedTaskCreation({
 
       {/* Expanded Form */}
       {isExpanded && (
-        <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-card border border-border rounded-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 p-4 bg-card border border-border rounded-lg"
+        >
           {/* Description */}
           <div className="space-y-2">
-            <label className="text-xs font-medium text-muted-foreground">Description (Optional)</label>
+            <label className="text-xs font-medium text-muted-foreground">
+              Description (Optional)
+            </label>
             <Textarea
               placeholder="Add more details..."
               value={description}
@@ -155,11 +160,11 @@ export function SimplifiedTaskCreation({
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full pl-3 text-left font-normal",
-                      !startDate && "text-muted-foreground"
+                      'w-full pl-3 text-left font-normal',
+                      !startDate && 'text-muted-foreground'
                     )}
                   >
-                    {startDate ? format(startDate, "MMM d") : <span>Today</span>}
+                    {startDate ? format(startDate, 'MMM d') : <span>Today</span>}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
@@ -181,21 +186,16 @@ export function SimplifiedTaskCreation({
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full pl-3 text-left font-normal",
-                      !endDate && "text-muted-foreground"
+                      'w-full pl-3 text-left font-normal',
+                      !endDate && 'text-muted-foreground'
                     )}
                   >
-                    {endDate ? format(endDate, "MMM d") : <span>+3 days</span>}
+                    {endDate ? format(endDate, 'MMM d') : <span>+3 days</span>}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={endDate}
-                    onSelect={setEndDate}
-                    initialFocus
-                  />
+                  <Calendar mode="single" selected={endDate} onSelect={setEndDate} initialFocus />
                 </PopoverContent>
               </Popover>
             </div>
@@ -204,12 +204,15 @@ export function SimplifiedTaskCreation({
           {/* Subtasks */}
           <div className="space-y-2">
             <label className="text-xs font-medium text-muted-foreground">Subtasks (Optional)</label>
-            
+
             {/* Existing Subtasks */}
             {subtasks.length > 0 && (
               <div className="space-y-1">
                 {subtasks.map((subtask, index) => (
-                  <div key={index} className="flex items-center gap-2 p-2 bg-secondary/30 rounded-md">
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 p-2 bg-secondary/30 rounded-md"
+                  >
                     <span className="flex-1 text-sm">{subtask}</span>
                     <Button
                       type="button"
