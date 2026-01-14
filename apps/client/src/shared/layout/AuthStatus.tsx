@@ -1,5 +1,5 @@
 import { Badge } from '@/shared/components/ui/badge';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 
 export default function AuthStatus() {
   const { isAuthenticated, user, isLoading } = useAuthStore();

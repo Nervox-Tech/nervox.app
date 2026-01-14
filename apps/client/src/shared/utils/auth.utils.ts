@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import type { AuthResponse, User, UserToken } from '../types/index';
+import type { AuthResponse, User, UserToken } from '@/shared/types/auth.types';
 
 const TOKEN_KEY = 'auth_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';

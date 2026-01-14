@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import type { AuthState, User, LoginCredentials, SignupData, AuthResponse, OnboardingData } from '../types/index';
-import { AuthUtils } from '../utils/index';
+import type { AuthState, User, LoginCredentials, SignupData, AuthResponse, OnboardingData } from '@/shared/types/auth.types';
+import { AuthUtils } from '@/shared/utils/auth.utils';
 
 interface AuthActions {
   // Authentication actions
