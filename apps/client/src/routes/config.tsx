@@ -7,6 +7,7 @@
 import { lazy } from 'react'
 import type { IRouteConfig } from '@/shared/types/route.type';
 import INBOX_ROUTE_CONFIG from '@/features/inbox/routes';
+import DASHBOARD_ROUTE_CONFIG from '@/features/dashboard/routes';
 
 /**
  * Not Found Page
@@ -17,6 +18,7 @@ const NotFound = lazy(() => import('@/features/NotFound').then((module) => ({ de
  * Main application routes
  */
 export const appRoutes: IRouteConfig[] = [
+    ...DASHBOARD_ROUTE_CONFIG,
     ...INBOX_ROUTE_CONFIG,
     {
         path: '*',
