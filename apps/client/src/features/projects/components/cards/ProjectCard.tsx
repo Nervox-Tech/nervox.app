@@ -36,7 +36,7 @@ interface EnhancedProject {
   updatedAt?: Date;
   aiRisk?: string;
   progress: number;
-  status: 'active' | 'completed' | 'on-hold';
+  status: 'active' | 'upcoming' | 'completed' | 'on-hold';
   taskCount: number;
   completedTaskCount: number;
 }
@@ -72,6 +72,11 @@ export function ProjectCard({
         return {
           label: 'Completed',
           className: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20',
+        };
+      case 'upcoming':
+        return {
+          label: 'Upcoming',
+          className: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20',
         };
       case 'on-hold':
         return {

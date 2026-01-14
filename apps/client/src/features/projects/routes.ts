@@ -2,12 +2,12 @@ import { lazy } from 'react';
 import type { IRouteConfig } from '@/shared/types/route.type';
 import ROUTE_PATH from '@/shared/constant/route';
 
-const ProjectIndex = lazy(() => import('./').then((module) => ({ default: module.ProjectIndex })));
+const ProjectsView = lazy(() => import('./').then((module) => ({ default: module.ProjectsView })));
 
 const PROJECT_ROUTE_CONFIG: IRouteConfig[] = [
   {
     path: ROUTE_PATH.PROJECTS,
-    element: ProjectIndex,
+    element: ProjectsView,
     title: 'Projects',
     description: 'List and manage Projects',
   },
