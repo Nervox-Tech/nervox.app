@@ -23,14 +23,14 @@ export function ProjectSidePanelFooter({
                     <Button
                         variant="ghost"
                         onClick={() => mode === 'create' ? onClose() : setMode('view')}
-                        className="flex-1 h-12 rounded-xl font-bold"
+                        className="flex-1 h-12 rounded-xl font-medium"
                     >
                         Cancel
                     </Button>
                     <Button
                         disabled={!isDirty}
                         onClick={handleSave}
-                        className="flex-[2] h-12 rounded-xl font-bold shadow-lg shadow-primary/20"
+                        className="flex-[2] h-12 rounded-xl font-medium"
                     >
                         <Save className="w-4 h-4 mr-2" />
                         {mode === 'create' ? 'Create Project' : 'Save Changes'}

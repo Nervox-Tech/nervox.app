@@ -41,7 +41,7 @@ export default function ProjectsView() {
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">{projects.length} Total Initiatives</p>
           </div>
         </div>
-        <Button onClick={handleNewProject} className="gap-2 rounded-xl h-12 px-6 shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+        <Button onClick={handleNewProject} className="gap-2 rounded-xl h-12 px-6 hover:scale-105 transition-transform">
           <Plus className="w-5 h-5 font-black" />
           <span className="font-bold">New Project</span>
         </Button>
