@@ -1,14 +1,17 @@
 import { Layout } from './shared/layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
+import { ThemeProvider } from './shared/components/common/theme-provider';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </BrowserRouter>
+    <ThemeProvider defaultTheme="system" storageKey="nervox-ui-theme">
+      <BrowserRouter>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
