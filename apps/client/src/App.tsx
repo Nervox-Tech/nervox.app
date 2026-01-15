@@ -1,19 +1,18 @@
-import { Suspense } from "react"
-import { Layout } from "./shared/layout/Layout"
-import {BrowserRouter } from 'react-router-dom';
-import AppRoutes from "./routes/AppRoutes";
+import { Layout } from './shared/layout/Layout';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
+import { ThemeProvider } from './shared/components/common/theme-provider';
 
 function App() {
-
   return (
-   <Suspense fallback={<div>Loading...</div>}>
-    <Layout>
+    <ThemeProvider defaultTheme="system" storageKey="nervox-ui-theme">
       <BrowserRouter>
-        <AppRoutes />
+        <Layout>
+          <AppRoutes />
+        </Layout>
       </BrowserRouter>
-    </Layout>
-   </Suspense>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

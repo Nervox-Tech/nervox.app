@@ -1,36 +1,28 @@
-import { Bell, Sparkles, Sun, Moon } from 'lucide-react';
-import { useTheme } from '@/shared/components/common/theme-provider';
+import { Bell, Sparkles } from 'lucide-react';
+import { ThemeToggle } from '@/shared/components/common/ThemeToggle';
 import { useAppStore } from '@/shared/stores/appStore';
 import { motion } from 'framer-motion';
 import { MobileSidebar } from './mobile-view/MobileSidebar';
 
 interface TopBarProps {
-  title: string;
+  title?: string;
   subtitle?: string;
 }
 
 export function TopBar({ title, subtitle }: TopBarProps) {
-  const { theme, setTheme } = useTheme();
   const { setCommandMenuOpen } = useAppStore();
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   return (
-    <header className="h-16 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-10">
+    <header className="h-14 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-20">
       <div className="flex items-center gap-2">
         <MobileSidebar />
         <div>
           <h1 className="text-lg sm:text-xl font-semibold text-foreground">{title}</h1>
-          {subtitle && (
-            <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>}
         </div>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-
         {/* AI Quick Action */}
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -42,16 +34,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
         </motion.button>
 
         {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-lg hover:bg-secondary transition-colors touch-manipulation"
-        >
-          {theme === 'dark' ? (
-            <Moon className="w-5 h-5 text-muted-foreground" />
-          ) : (
-            <Sun className="w-5 h-5 text-muted-foreground" />
-          )}
-        </button>
+        <ThemeToggle />
 
         {/* Notifications */}
         <button className="relative p-2 rounded-lg hover:bg-secondary transition-colors touch-manipulation">
