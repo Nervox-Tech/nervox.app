@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import { Mail, MessageCircle } from "lucide-react";
-import type { Thread } from "@/features/inbox/types";
-import { useInboxStore } from "@/features/inbox/store/useInboxStore";
+import { cn } from '@/lib/utils';
+import { Mail, MessageCircle } from 'lucide-react';
+import type { Thread } from '@/features/inbox/types';
+import { useInboxStore } from '@/features/inbox/store/useInboxStore';
 
 interface InboxCardProps {
   thread: Thread;
@@ -16,20 +16,26 @@ const InboxCard = ({ thread }: InboxCardProps) => {
     <button
       onClick={() => setActiveThreadId(thread.id)}
       className={cn(
-        "w-full flex flex-col gap-2 p-3 rounded-xl cursor-pointer transition-all border text-left",
+        'w-full flex flex-col gap-2 p-3 rounded-xl cursor-pointer transition-all border text-left',
         isActive
-          ? "bg-secondary border-border"
-          : "bg-transparent border-transparent hover:bg-secondary/50"
+          ? 'bg-secondary border-border'
+          : 'bg-transparent border-transparent hover:bg-secondary/50'
       )}
     >
       <div className="flex justify-between items-start">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <img src={thread.contact.avatar} className="w-10 h-10 rounded-full bg-secondary" alt="" />
+            <img
+              src={thread.contact.avatar}
+              className="w-10 h-10 rounded-full bg-secondary"
+              alt=""
+            />
             <div className="absolute -bottom-0.5 -right-0.5 bg-background rounded-full p-0.5">
-              {thread.type === 'email'
-                ? <Mail className="w-3 h-3 text-platform-email" />
-                : <MessageCircle className="w-3 h-3 text-platform-whatsapp" />}
+              {thread.type === 'email' ? (
+                <Mail className="w-3 h-3 text-platform-email" />
+              ) : (
+                <MessageCircle className="w-3 h-3 text-platform-whatsapp" />
+              )}
             </div>
           </div>
           <div className="min-w-0">

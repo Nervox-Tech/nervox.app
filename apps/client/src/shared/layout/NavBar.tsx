@@ -18,19 +18,16 @@ export function TopBar({ title, subtitle }: TopBarProps) {
   };
 
   return (
-    <header className="h-14 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-10">
+    <header className="h-14 border-b border-border flex items-center justify-between px-4 sm:px-6 bg-background/80 backdrop-blur-xs sticky top-0 z-20">
       <div className="flex items-center gap-2">
         <MobileSidebar />
         <div>
           <h1 className="text-lg sm:text-xl font-semibold text-foreground">{title}</h1>
-          {subtitle && (
-            <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>}
         </div>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-
         {/* AI Quick Action */}
         <motion.button
           whileHover={{ scale: 1.05 }}

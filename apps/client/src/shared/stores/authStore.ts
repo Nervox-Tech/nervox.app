@@ -1,5 +1,12 @@
 import { create } from 'zustand';
-import type { AuthState, User, LoginCredentials, SignupData, AuthResponse, OnboardingData } from '@/shared/types/auth.types';
+import type {
+  AuthState,
+  User,
+  LoginCredentials,
+  SignupData,
+  AuthResponse,
+  OnboardingData,
+} from '@/shared/types/auth.types';
 import { AuthUtils } from '@/shared/utils/auth.utils';
 
 interface AuthActions {
@@ -31,9 +38,9 @@ interface AuthStore extends AuthState, AuthActions {
 
 // Mock API functions (replace with real API calls)
 const mockAuthAPI = {
-  async login({email, password}: LoginCredentials): Promise<AuthResponse> {
+  async login({ email, password }: LoginCredentials): Promise<AuthResponse> {
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Mock validation
     if (email === 'demo@example.com' && password === 'password') {
@@ -52,34 +59,34 @@ const mockAuthAPI = {
             quietHours: {
               enabled: false,
               start: '22:00',
-              end: '08:00'
-            }
+              end: '08:00',
+            },
           },
           productivity: {
             workingHours: {
               start: '09:00',
-              end: '17:00'
+              end: '17:00',
             },
             focusMode: false,
             autoScheduling: true,
-            energyTracking: true
+            energyTracking: true,
           },
           aiAssistant: {
             enabled: true,
             suggestions: true,
             autoResponses: false,
-            contextSharing: true
-          }
+            contextSharing: true,
+          },
         },
         subscription: 'free',
         createdAt: new Date(),
-        lastLoginAt: new Date()
+        lastLoginAt: new Date(),
       };
 
       return {
         user,
         token: AuthUtils.generateMockToken(user.id),
-        refreshToken: AuthUtils.generateMockToken(user.id + '_refresh')
+        refreshToken: AuthUtils.generateMockToken(user.id + '_refresh'),
       };
     }
 
@@ -88,16 +95,17 @@ const mockAuthAPI = {
 
   async signup(data: SignupData): Promise<AuthResponse> {
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     // Mock validation
-    if ( 
+    if (
       !data?.email ||
       !data?.password ||
       !data?.name ||
       !data?.acceptTerms ||
       !data?.acceptPrivacy
-    ) throw new Error('Invalid signup data');
-    
+    )
+      throw new Error('Invalid signup data');
+
     const user: User = {
       id: crypto.randomUUID(),
       email: data.email,
@@ -113,40 +121,40 @@ const mockAuthAPI = {
           quietHours: {
             enabled: false,
             start: '22:00',
-            end: '08:00'
-          }
+            end: '08:00',
+          },
         },
         productivity: {
           workingHours: {
             start: '09:00',
-            end: '17:00'
+            end: '17:00',
           },
           focusMode: false,
           autoScheduling: true,
-          energyTracking: true
+          energyTracking: true,
         },
         aiAssistant: {
           enabled: true,
           suggestions: true,
           autoResponses: false,
-          contextSharing: true
-        }
+          contextSharing: true,
+        },
       },
       subscription: 'free',
       createdAt: new Date(),
-      lastLoginAt: new Date()
+      lastLoginAt: new Date(),
     };
 
     return {
       user,
       token: AuthUtils.generateMockToken(user.id),
-      refreshToken: AuthUtils.generateMockToken(user.id + '_refresh')
+      refreshToken: AuthUtils.generateMockToken(user.id + '_refresh'),
     };
   },
 
   async refreshToken(refreshToken: string): Promise<AuthResponse> {
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Mock refresh logic
     const user = AuthUtils.getStoredUser();
@@ -157,9 +165,9 @@ const mockAuthAPI = {
     return {
       user,
       token: AuthUtils.generateMockToken(user.id),
-      refreshToken: AuthUtils.generateMockToken(user.id + '_refresh')
+      refreshToken: AuthUtils.generateMockToken(user.id + '_refresh'),
     };
-  }
+  },
 };
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
@@ -172,7 +180,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   onboardingData: {
     preferences: {},
     completedSteps: [],
-    isCompleted: false
+    isCompleted: false,
   },
 
   // Authentication actions
@@ -190,12 +198,12 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         token: authResponse.token,
         isAuthenticated: true,
         isLoading: false,
-        error: null
+        error: null,
       });
     } catch (error) {
       set({
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Login failed'
+        error: error instanceof Error ? error.message : 'Login failed',
       });
       throw error;
     }
@@ -220,13 +228,13 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         onboardingData: {
           preferences: {},
           completedSteps: [],
-          isCompleted: false
-        }
+          isCompleted: false,
+        },
       });
     } catch (error) {
       set({
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Signup failed'
+        error: error instanceof Error ? error.message : 'Signup failed',
       });
       throw error;
     }
@@ -243,8 +251,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       onboardingData: {
         preferences: {},
         completedSteps: [],
-        isCompleted: false
-      }
+        isCompleted: false,
+      },
     });
   },
 
@@ -264,7 +272,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       set({
         user: authResponse.user,
         token: authResponse.token,
-        isAuthenticated: true
+        isAuthenticated: true,
       });
     } catch (_error) {
       // console.error('Token refresh failed:', error);
@@ -287,8 +295,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
   // Onboarding
   updateOnboarding: (data: Partial<OnboardingData>) => {
-    set(state => ({
-      onboardingData: { ...state.onboardingData, ...data }
+    set((state) => ({
+      onboardingData: { ...state.onboardingData, ...data },
     }));
   },
 
@@ -299,17 +307,17 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     if (user && onboardingData.preferences) {
       const updatedUser = {
         ...user,
-        preferences: { ...user.preferences, ...onboardingData.preferences }
+        preferences: { ...user.preferences, ...onboardingData.preferences },
       };
       get().updateUser(updatedUser);
     }
 
     // Mark onboarding as completed
-    set(state => ({
+    set((state) => ({
       onboardingData: {
         ...state.onboardingData,
-        isCompleted: true
-      }
+        isCompleted: true,
+      },
     }));
   },
 
@@ -328,7 +336,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         user,
         token,
         isAuthenticated: true,
-        isLoading: false
+        isLoading: false,
       });
     } else {
       // Clear any invalid stored data
@@ -337,8 +345,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         user: null,
         token: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: false,
       });
     }
-  }
+  },
 }));

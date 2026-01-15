@@ -1,4 +1,3 @@
-
 # Nervox Overview
 
 **Nervox** is a personalized AI-powered task manager designed to help users organize and manage their tasks efficiently with AI assistance.
@@ -23,6 +22,7 @@ nervox.app/
 ## Tech Stack
 
 ### Frontend (Client)
+
 - **Framework**: React 19 with TypeScript
 - **Build Tool**: Vite
 - **Routing**: React Router v6
@@ -37,11 +37,13 @@ nervox.app/
 - **Testing**: Vitest
 
 ### Backend (Server)
+
 - **Framework**: NestJS
 - **Runtime**: Node.js (>=18)
 - **Testing**: Jest
 
 ### Development Tools
+
 - **Monorepo**: Turborepo
 - **Package Manager**: pnpm 9.0.0
 - **Code Quality**: ESLint, Prettier
@@ -64,11 +66,13 @@ pnpm install
 ### Development
 
 Run all apps in development mode:
+
 ```bash
 pnpm dev
 ```
 
 Run only the client:
+
 ```bash
 pnpm dev:client
 ```
@@ -76,6 +80,7 @@ pnpm dev:client
 ### Building
 
 Build all apps:
+
 ```bash
 pnpm build
 ```
@@ -83,6 +88,7 @@ pnpm build
 ### Testing
 
 Run tests:
+
 ```bash
 pnpm test
 ```
@@ -90,16 +96,19 @@ pnpm test
 ### Code Quality
 
 Lint all packages:
+
 ```bash
 pnpm lint
 ```
 
 Format code:
+
 ```bash
 pnpm format
 ```
 
 Type checking:
+
 ```bash
 pnpm check-types
 ```
@@ -107,6 +116,8 @@ pnpm check-types
 ## License
 
 See [LICENSE](LICENSE) file for details.
+
 ```
 
 
+```

@@ -1,18 +1,18 @@
-import { Button } from "@/shared/components/ui/button";
-import { Sparkles, Paperclip, PenSquare, Send, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useInboxStore } from "@/features/inbox/store/useInboxStore";
-import { useEffect, useRef, useState } from "react";
+import { Button } from '@/shared/components/ui/button';
+import { Sparkles, Paperclip, PenSquare, Send, Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useInboxStore } from '@/features/inbox/store/useInboxStore';
+import { useEffect, useRef, useState } from 'react';
 
 const ReplyBox = () => {
-  const isEditingDraft = useInboxStore(s => s.isEditingDraft);
-  const setIsEditingDraft = useInboxStore(s => s.setIsEditingDraft);
-  const activeThreadId = useInboxStore(s => s.activeThreadId);
-  const drafts = useInboxStore(s => s.drafts);
-  const setDraft = useInboxStore(s => s.setDraft);
-  const sendMessage = useInboxStore(s => s.sendMessage);
-  const addAttachment = useInboxStore(s => s.addAttachment);
-  const removeAttachment = useInboxStore(s => s.removeAttachment);
+  const isEditingDraft = useInboxStore((s) => s.isEditingDraft);
+  const setIsEditingDraft = useInboxStore((s) => s.setIsEditingDraft);
+  const activeThreadId = useInboxStore((s) => s.activeThreadId);
+  const drafts = useInboxStore((s) => s.drafts);
+  const setDraft = useInboxStore((s) => s.setDraft);
+  const sendMessage = useInboxStore((s) => s.sendMessage);
+  const addAttachment = useInboxStore((s) => s.addAttachment);
+  const removeAttachment = useInboxStore((s) => s.removeAttachment);
 
   const [isAiLoading, setIsAiLoading] = useState(false);
 
@@ -58,7 +58,9 @@ const ReplyBox = () => {
                 <Sparkles className="w-4 h-4" />
                 <span className="font-medium">AI Suggested Reply</span>
               </div>
-              <span className="text-xs text-muted-foreground transition-all duration-500 animate-in fade-in">Confidence: 94%</span>
+              <span className="text-xs text-muted-foreground transition-all duration-500 animate-in fade-in">
+                Confidence: 94%
+              </span>
             </>
           )}
         </div>
@@ -82,13 +84,15 @@ const ReplyBox = () => {
           </div>
         )}
 
-        <div className={cn(
-          "rounded-xl p-4 border transition-all relative overflow-hidden",
-          isEditingDraft
-            ? "border-primary bg-background ring-2 ring-primary/20"
-            : "border-border bg-secondary/30",
-          isAiLoading && "opacity-50 pointer-events-none"
-        )}>
+        <div
+          className={cn(
+            'rounded-xl p-4 border transition-all relative overflow-hidden',
+            isEditingDraft
+              ? 'border-primary bg-background ring-2 ring-primary/20'
+              : 'border-border bg-secondary/30',
+            isAiLoading && 'opacity-50 pointer-events-none'
+          )}
+        >
           {isAiLoading && (
             <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10">
               <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -99,7 +103,7 @@ const ReplyBox = () => {
             onChange={(e) => setDraft(activeThreadId, e.target.value)}
             onClick={() => setIsEditingDraft(true)}
             onKeyDown={(e) => {
-              if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+              if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
                 handleSend();
               }
@@ -132,7 +136,12 @@ const ReplyBox = () => {
             />
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setIsEditingDraft(!isEditingDraft)}>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => setIsEditingDraft(!isEditingDraft)}
+            >
               <PenSquare className="w-4 h-4" /> Edit
             </Button>
             <Button

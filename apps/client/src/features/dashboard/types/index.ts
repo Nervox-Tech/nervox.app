@@ -86,7 +86,6 @@ export interface WeeklyStats {
   insights: string[];
 }
 
-
 export interface AppState {
   // Navigation
   activeView: string;

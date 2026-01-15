@@ -1,17 +1,15 @@
-import { Layout } from "./shared/layout/Layout"
-import {BrowserRouter } from 'react-router-dom';
-import AppRoutes from "./routes/AppRoutes";
-
+import { Layout } from './shared/layout/Layout';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
-
   return (
-      <BrowserRouter>
-    <Layout>
+    <BrowserRouter>
+      <Layout>
         <AppRoutes />
-    </Layout>
-      </BrowserRouter>
-  )
+      </Layout>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -7,7 +7,11 @@ import MessageBubble from '../cards/MessageBubble';
 import ReplyBox from './ReplyBox';
 import { useEffect, useRef, useMemo } from 'react';
 import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@/shared/components/ui/dropdown-menu';
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from '@/shared/components/ui/dropdown-menu';
 
 const MessageThread = () => {
   const activeThreadId = useInboxStore((state) => state.activeThreadId);
@@ -52,7 +56,9 @@ const MessageThread = () => {
             alt=""
           />
           <div>
-            <h2 className="font-semibold text-foreground text-sm md:text-base">{activeThread.contact.name}</h2>
+            <h2 className="font-semibold text-foreground text-sm md:text-base">
+              {activeThread.contact.name}
+            </h2>
             <p className="text-xs text-muted-foreground flex items-center gap-1">
               {activeThread.contact.role} • Via{' '}
               {activeThread.type === 'email' ? 'Email' : 'WhatsApp'}
@@ -80,10 +86,7 @@ const MessageThread = () => {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
 
-
-              <DropdownMenuItem
-                className="text-destructive focus:text-destructive"
-              >
+              <DropdownMenuItem className="text-destructive focus:text-destructive">
                 <Trash2 className="w-4 h-4 mr-2" />
                 Delete
               </DropdownMenuItem>
