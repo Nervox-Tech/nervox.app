@@ -25,6 +25,8 @@ import { useAuthStore } from '@/shared/stores/authStore';
 import { SimplifiedTaskCreation } from '../components/SimplifiedTaskCreation';
 import { EmptyState } from '@/shared/components/ui/empty-state';
 import { Button } from '@/shared/components/ui/button';
+import { Link } from 'react-router-dom';
+import ROUTE_PATH from '@/shared/constant/route';
 
 export function Dashboard() {
     const { tasks, messages, ideas, documents, projects, setActiveView, setCreateTaskOpen } = useAppStore();
@@ -205,15 +207,17 @@ export function Dashboard() {
                                     <ListTodo className="w-5 h-5 text-primary" />
                                     Today's Tasks
                                 </CardTitle>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="gap-1 text-muted-foreground hover:text-foreground"
-                                    onClick={() => setActiveView('tasks')}
-                                >
-                                    <span className="hidden sm:inline">View all</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </Button>
+                                <Link to={ROUTE_PATH.TASKS}>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="gap-1 text-muted-foreground hover:text-foreground"
+                                        onClick={() => setActiveView('tasks')}
+                                    >
+                                        <span className="hidden sm:inline">View all</span>
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Button>
+                                </Link>
                             </CardHeader>
                             <CardContent className="space-y-3">
                                 {/* Simplified Task Creation */}
@@ -277,25 +281,26 @@ export function Dashboard() {
                             </CardHeader>
                             <CardContent className="space-y-2">
                                 {[
-                                    { icon: FolderKanban, label: 'Projects', count: projects.length, view: 'projects' as const, color: 'text-blue-500 bg-blue-500/10' },
-                                    { icon: Mail, label: 'Inbox', count: pendingMessages, view: 'inbox' as const, color: 'text-green-500 bg-green-500/10' },
-                                    { icon: Lightbulb, label: 'Ideas', count: ideas.length, view: 'ideas' as const, color: 'text-amber-500 bg-amber-500/10' },
-                                    { icon: FileText, label: 'Documents', count: documents.length, view: 'documents' as const, color: 'text-purple-500 bg-purple-500/10' },
+                                    { icon: FolderKanban, label: 'Projects', count: projects.length, view: 'projects' as const, color: 'text-blue-500 bg-blue-500/10', link: ROUTE_PATH.PROJECTS },
+                                    { icon: Mail, label: 'Inbox', count: pendingMessages, view: 'inbox' as const, color: 'text-green-500 bg-green-500/10', link: ROUTE_PATH.INBOX.INDEX },
+                                    { icon: FileText, label: 'Documents', count: documents.length, view: 'documents' as const, color: 'text-purple-500 bg-purple-500/10', link: ROUTE_PATH.DOCUMENTS },
                                 ].map((item) => (
-                                    <button
-                                        key={item.label}
-                                        onClick={() => setActiveView(item.view)}
-                                        className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-secondary/50 transition-colors group text-left"
-                                    >
-                                        <div className={cn("p-2 rounded-lg", item.color.split(' ')[1])}>
-                                            <item.icon className={cn("w-4 h-4", item.color.split(' ')[0])} />
-                                        </div>
-                                        <span className="flex-1 text-sm text-foreground font-medium">{item.label}</span>
-                                        <span className="text-xs text-muted-foreground bg-secondary/50 px-2 py-1 rounded-md">
-                                            {item.count}
-                                        </span>
-                                        <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    </button>
+                                    <Link to={item.link.toString()}>
+                                        <button
+                                            key={item.label}
+                                            onClick={() => setActiveView(item.view)}
+                                            className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-secondary/50 transition-colors group text-left"
+                                        >
+                                            <div className={cn("p-2 rounded-lg", item.color.split(' ')[1])}>
+                                                <item.icon className={cn("w-4 h-4", item.color.split(' ')[0])} />
+                                            </div>
+                                            <span className="flex-1 text-sm text-foreground font-medium">{item.label}</span>
+                                            <span className="text-xs text-muted-foreground bg-secondary/50 px-2 py-1 rounded-md">
+                                                {item.count}
+                                            </span>
+                                            <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </button>
+                                    </Link>
                                 ))}
                             </CardContent>
                         </Card>
@@ -353,15 +358,17 @@ export function Dashboard() {
                                     <BarChart3 className="w-5 h-5 text-primary" />
                                     Projects
                                 </CardTitle>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="gap-1 text-muted-foreground hover:text-foreground"
-                                    onClick={() => setActiveView('projects')}
-                                >
-                                    <span className="hidden sm:inline">View all</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </Button>
+                                <Link to={ROUTE_PATH.PROJECTS}>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="gap-1 text-muted-foreground hover:text-foreground"
+                                        onClick={() => setActiveView('projects')}
+                                    >
+                                        <span className="hidden sm:inline">View all</span>
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Button>
+                                </Link>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-3">
