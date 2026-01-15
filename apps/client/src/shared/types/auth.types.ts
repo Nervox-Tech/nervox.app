@@ -1,3 +1,11 @@
+export interface APIKey {
+  id: string;
+  name: string;
+  key: string;
+  provider: 'openrouter';
+  createdAt: Date;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -7,6 +15,7 @@ export interface User {
   subscription: SubscriptionTier;
   createdAt: Date;
   lastLoginAt: Date;
+  apiKeys: APIKey[];
 }
 
 export interface UserPreferences {

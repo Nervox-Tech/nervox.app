@@ -6,6 +6,7 @@ import type {
   SignupData,
   AuthResponse,
   OnboardingData,
+  APIKey,
 } from '@/shared/types/auth.types';
 import { AuthUtils } from '@/shared/utils/auth.utils';
 
@@ -22,6 +23,10 @@ interface AuthActions {
   // Onboarding
   updateOnboarding: (data: Partial<OnboardingData>) => void;
   completeOnboarding: () => void;
+
+  // API Key management
+  addAPIKey: (key: Omit<APIKey, 'id' | 'createdAt'>) => void;
+  deleteAPIKey: (id: string) => void;
 
   // State management
   setLoading: (loading: boolean) => void;
@@ -81,6 +86,7 @@ const mockAuthAPI = {
         subscription: 'free',
         createdAt: new Date(),
         lastLoginAt: new Date(),
+        apiKeys: [],
       };
 
       return {
@@ -143,6 +149,7 @@ const mockAuthAPI = {
       subscription: 'free',
       createdAt: new Date(),
       lastLoginAt: new Date(),
+      apiKeys: [],
     };
 
     return {
@@ -291,6 +298,30 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     localStorage.setItem('user_data', JSON.stringify(updatedUser));
 
     set({ user: updatedUser });
+  },
+
+  addAPIKey: (key: Omit<APIKey, 'id' | 'createdAt'>) => {
+    const { user, updateUser } = get();
+    if (!user) return;
+
+    const newKey: APIKey = {
+      ...key,
+      id: crypto.randomUUID(),
+      createdAt: new Date(),
+    };
+
+    updateUser({
+      apiKeys: [...(user.apiKeys || []), newKey],
+    });
+  },
+
+  deleteAPIKey: (id: string) => {
+    const { user, updateUser } = get();
+    if (!user) return;
+
+    updateUser({
+      apiKeys: (user.apiKeys || []).filter((k) => k.id !== id),
+    });
   },
 
   // Onboarding
