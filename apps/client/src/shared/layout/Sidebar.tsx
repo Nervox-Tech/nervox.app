@@ -1,7 +1,7 @@
 import { Inbox, CheckSquare, FileText, FolderKanban, Settings, Grid } from 'lucide-react';
 import { useAppStore } from '@/shared/stores/appStore';
 import { useIsMobile } from '@/shared/hooks/use-responsive';
-import { SidebarNavItem } from '../components/Layout/SidebarNavItem';
+import { SidebarNavItem } from './components/SidebarNavItem';
 import ROUTE_PATH from '../constant/route';
 import { Images } from '../assets';
 

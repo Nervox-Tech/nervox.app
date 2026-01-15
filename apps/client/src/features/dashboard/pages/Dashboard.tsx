@@ -827,6 +827,6 @@ export function Dashboard() {
           </Card>
         </motion.div>
       </div>
-       </>
+    </>
   );
 }
