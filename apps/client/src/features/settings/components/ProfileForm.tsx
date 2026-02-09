@@ -4,6 +4,7 @@ import { Mail, Upload, Loader2 } from 'lucide-react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { toast } from 'sonner';
 import { useTheme } from '@/shared/components/common/theme-provider';
+import type { UserPreferences } from '@/shared/types/auth.types';
 
 export function ProfileForm() {
     const { user, updateUser } = useAuthStore();
@@ -21,11 +22,11 @@ export function ProfileForm() {
             updateUser({
                 preferences: {
                     ...user.preferences,
-                    theme: currentTheme,
+                    theme: currentTheme as UserPreferences['theme'],
                 }
             });
         }
-    }, [currentTheme , user , updateUser]);
+    }, [currentTheme, user, updateUser]);
 
     const handleSave = async () => {
         setIsLoading(true);
@@ -36,8 +37,8 @@ export function ProfileForm() {
                 name: formData.name,
                 email: formData.email,
                 preferences: {
-                    ...user?.preferences,
-                    theme: currentTheme
+                    ...(user?.preferences as UserPreferences), 
+                    theme: currentTheme as UserPreferences['theme']
                 }
             });
             toast.success('Profile updated successfully');
