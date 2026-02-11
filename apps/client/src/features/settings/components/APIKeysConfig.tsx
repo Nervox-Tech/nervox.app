@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/shared/components/ui/button';
 import { Key, Trash2, Plus, Copy, Check, Eye, EyeOff } from 'lucide-react';
 import { useAuthStore } from '@/shared/stores/authStore';
